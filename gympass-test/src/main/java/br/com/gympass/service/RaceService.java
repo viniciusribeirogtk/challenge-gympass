@@ -17,7 +17,7 @@ import br.com.gympass.vo.RaceResultVO;
 public class RaceService {
 	
 	private LocalTime bestLapRace = LocalTime.MAX;
-	
+	private Integer totalRaceLaps = 0;
 	public void printRaceResult(RaceResultVO raceResultVO) {
 		List<PilotRaceResultVO> pilotRaceResultVOs = raceResultVO.getPilotRaceResultVOs();
 
@@ -50,7 +50,7 @@ public class RaceService {
 					+pilotResult.getAverageTimeTotal());
 			
 		});
-		System.out.println("\n\n");
+		System.out.println("\n");
 		System.out.println("BEST RACE LAP TIME: " +raceResultVO.getBestLapRace());
 	}
 	
@@ -58,17 +58,20 @@ public class RaceService {
 		RaceResultVO raceResultVO = new RaceResultVO();
 		List<PilotRaceResultVO> pilotRaceResultVOs = new ArrayList<>();
 		Map<Integer, PilotRaceResultVO> pilotRaceResultMap = new HashMap<>();
-		
 		laps.forEach(lap -> {
 			PilotRaceResultVO pilotRaceResultVO = pilotRaceResultMap.get(lap.getPilotCode());
-			if (isBestLapRace(lap.getLapTime(), bestLapRace)) {
-				bestLapRace = lap.getLapTime();
-				raceResultVO.setBestLapRace(lap.getLapTime());
-			}
 			if(nonNull(pilotRaceResultVO)){
+				if (totalRaceLaps < pilotRaceResultVO.getLaps()) {
+					totalRaceLaps = pilotRaceResultVO.getLaps();
+				}
 				fillPilotLap(pilotRaceResultMap, lap, pilotRaceResultVO);
 			} else {
 				addPilot(pilotRaceResultMap, lap);
+			}
+			
+			if (isBestLapRace(lap.getLapTime(), bestLapRace)) {
+				bestLapRace = lap.getLapTime();
+				raceResultVO.setBestLapRace(lap.getLapTime());
 			}
 		});
 		fillPilotRaceResult(pilotRaceResultVOs, pilotRaceResultMap);
@@ -82,7 +85,7 @@ public class RaceService {
 		for (int i = 0; i < pilotRaceResultVOs.size(); i++) {
 			PilotRaceResultVO pilotRaceResultVO = pilotRaceResultVOs.get(i);
 			pilotRaceResultVO.setPosition(i+1);
-			pilotRaceResultVO.setAverageTimeTotal(pilotRaceResultVO.getAverageTimeTotal() / 4);
+			pilotRaceResultVO.setAverageTimeTotal(pilotRaceResultVO.getAverageTimeTotal() / totalRaceLaps);
 		}
 		//Fill time after winner
 		LocalTime winnerTime = pilotRaceResultVOs.get(0).getTotalTime();

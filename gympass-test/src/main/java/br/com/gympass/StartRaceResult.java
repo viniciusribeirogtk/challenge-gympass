@@ -7,17 +7,12 @@ import br.com.gympass.utils.RaceFileUtils;
 import br.com.gympass.vo.LapDetailsVO;
 import br.com.gympass.vo.RaceResultVO;
 
-public class Start {
+public class StartRaceResult {
 	
     public static void main(String[] args) {
+    	RaceService raceService = new RaceService();
     	List<LapDetailsVO> lapDetailsVO = RaceFileUtils.readKartFileAndBuildLapDetailsVO();
-    	mountRaceResult(lapDetailsVO);
-    }
-
-	private static void mountRaceResult(List<LapDetailsVO> lapDetailsVO) {
-		RaceService raceService = new RaceService();
 		RaceResultVO raceResultVO = raceService.fillResultRace(lapDetailsVO);
 		raceService.printRaceResult(raceResultVO);
-	}
-
+    }
 }

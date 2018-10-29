@@ -18,12 +18,15 @@ public class RaceFileUtils {
 
 	public static List<LapDetailsVO> readKartFileAndBuildLapDetailsVO(){
 		List<String> kartResultLines = readKartFileList();
+		//Remove Header Line
 		kartResultLines.remove(0);
 		List<LapDetailsVO> lapDetailsVO = new ArrayList<>();
 		
 		for (String line : kartResultLines) {
-			String[] resultLine = line.split(COLUMN_DELIMITER);
-			lapDetailsVO.add(LapDetailVOBuilder.buildLapDetails(resultLine));
+			if (!line.isEmpty()) {
+				String[] resultLine = line.split(COLUMN_DELIMITER);
+				lapDetailsVO.add(LapDetailVOBuilder.buildLapDetails(resultLine));
+			}
 		}
 		return lapDetailsVO;
 	}
