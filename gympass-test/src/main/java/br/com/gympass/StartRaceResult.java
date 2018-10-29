@@ -11,7 +11,7 @@ public class StartRaceResult {
 	
     public static void main(String[] args) {
     	RaceService raceService = new RaceService();
-    	List<LapDetailsVO> lapDetailsVO = RaceFileUtils.readKartFileAndBuildLapDetailsVO();
+    	List<LapDetailsVO> lapDetailsVO = RaceFileUtils.buildLapDetailsVOByFile();
 		RaceResultVO raceResultVO = raceService.fillResultRace(lapDetailsVO);
 		raceService.printRaceResult(raceResultVO);
     }

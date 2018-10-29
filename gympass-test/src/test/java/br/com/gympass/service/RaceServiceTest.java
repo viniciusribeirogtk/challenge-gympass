@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.Test;
 
 import br.com.gympass.vo.LapDetailsVO;
-import br.com.gympass.vo.PilotRaceResultVO;
+import br.com.gympass.vo.PilotResultVO;
 import br.com.gympass.vo.RaceResultVO;
 
 public class RaceServiceTest {
@@ -21,10 +21,10 @@ public class RaceServiceTest {
 		List<LapDetailsVO> laps = buildLapDetailsVO();
 		RaceResultVO resultRace = raceService.fillResultRace(laps);
 
-		PilotRaceResultVO first = resultRace.getPilotRaceResultVOs().get(0);
-		PilotRaceResultVO second = resultRace.getPilotRaceResultVOs().get(1);
-		PilotRaceResultVO third = resultRace.getPilotRaceResultVOs().get(2);
-		PilotRaceResultVO fourth = resultRace.getPilotRaceResultVOs().get(3);
+		PilotResultVO first = resultRace.getPilotRaceResultVOs().get(0);
+		PilotResultVO second = resultRace.getPilotRaceResultVOs().get(1);
+		PilotResultVO third = resultRace.getPilotRaceResultVOs().get(2);
+		PilotResultVO fourth = resultRace.getPilotRaceResultVOs().get(3);
 		
 		assertEquals(first.getPosition(), Integer.valueOf(1));
 		assertEquals(first.getPilotName(), "F.MASSA");

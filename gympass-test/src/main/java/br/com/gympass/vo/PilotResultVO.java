@@ -3,7 +3,7 @@ package br.com.gympass.vo;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 
-public class PilotRaceResultVO {
+public class PilotResultVO {
 
 	private Integer position;
 	private Integer pilotCode;
@@ -14,7 +14,7 @@ public class PilotRaceResultVO {
 	private Double averageTimeTotal;
 	private LocalTime timeRemains;
 	
-	public PilotRaceResultVO(Integer position, Integer pilotCode, String pilotName, Integer laps, LocalTime totalTime,
+	public PilotResultVO(Integer position, Integer pilotCode, String pilotName, Integer laps, LocalTime totalTime,
 			LocalTime bestLapTime, Double averageTimeTotal, LocalTime timeRemains) {
 		this.position = position;
 		this.pilotCode = pilotCode;
@@ -67,7 +67,7 @@ public class PilotRaceResultVO {
 	}
 	
 	public String getTotalTimeFormated() {
-		return String.format("%02d:%02d:%03d\"", 
+		return String.format("%02d:%02d:%03d", 
 				totalTime.getMinute(), 
 				totalTime.getSecond(),
 				totalTime.getNano());
@@ -82,7 +82,7 @@ public class PilotRaceResultVO {
 	}
 	
 	public String getBestLapTimeFormated() {
-		return String.format("%02d:%02d:%03d\"", 
+		return String.format("%02d:%02d:%03d", 
 				bestLapTime.getMinute(), 
 				bestLapTime.getSecond(),
 				bestLapTime.getNano());
@@ -106,6 +106,13 @@ public class PilotRaceResultVO {
 
 	public void setTimeRemains(LocalTime timeRemains) {
 		this.timeRemains = timeRemains;
+	}
+	
+	public String getTimeRemainsFormated() {
+		return String.format("%02d:%02d:%03d", 
+				timeRemains.getMinute(), 
+				timeRemains.getSecond(),
+				timeRemains.getNano());
 	}
 
 	@Override
