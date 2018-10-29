@@ -17,7 +17,7 @@ Clone this repository
 ```
 git clone https://github.com/viniciusribeirogtk/test-job.git
 ```
-Inside this git repository have an jar file compiled from execute the test.
+Inside this git repository have an jar file compiled to execute the test.
 To run it navigate into the project root folder and execute:
 
 ```

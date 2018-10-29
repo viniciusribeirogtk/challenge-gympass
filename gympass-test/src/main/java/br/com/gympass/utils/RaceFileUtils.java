@@ -40,6 +40,9 @@ public class RaceFileUtils {
 		InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(FILENAME);
 		try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             linesReaded = bufferedReader.lines().collect(Collectors.toList());
+            System.out.println("Kart file Readed");
+            linesReaded.forEach(System.out::println);
+            System.out.println("\n\n");
         } catch (IOException e) {
             e.printStackTrace();
         }

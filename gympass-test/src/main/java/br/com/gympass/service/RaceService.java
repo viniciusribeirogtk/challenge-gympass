@@ -3,6 +3,7 @@ package br.com.gympass.service;
 import static java.util.Objects.isNull;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -43,29 +44,30 @@ public class RaceService {
 	}
 	
 	public void printRaceResult(RaceResultVO raceResultVO) {
+		NumberFormat numberFormat = NumberFormat.getInstance();
+		numberFormat.setMinimumIntegerDigits(2);
 		List<PilotResultVO> pilotResultVOs = raceResultVO.getPilotRaceResultVOs();
 		System.out.println("========================================================== RACE RESULT ========================================================== ");
 		System.out.println("POSITION                | PILOT CODE                | PILOT NAME                      | LAPS COMPLETED                | TOTAL TIME             ");
 		pilotResultVOs.forEach(pilotResult -> {
 			System.out.println(
-					pilotResult.getPosition()+
+					numberFormat.format(pilotResult.getPosition())+
 					"                         "+
-					pilotResult.getPilotCode()+
+					numberFormat.format(pilotResult.getPilotCode())+
 					"                          "+
 					pilotResult.getPilotName()+
 					"                               "+
-					pilotResult.getLaps()+
+					numberFormat.format(pilotResult.getLaps())+
 					"                          "+
 					pilotResult.getTotalTimeFormated());
 		});
-		System.out.println("================================================================================================================================= ");
 		System.out.println("========================================================== BONUS RESULT ========================================================= ");
 		System.out.println("PILOT NAME                | PILOT POSITION                | BEST LAP TIME                      | TIME REMAINS                | AVERAGE RACE             ");
 		pilotResultVOs.forEach(pilotResult -> {
 			System.out.println(
 					pilotResult.getPilotName()+
 					"                         "+
-					pilotResult.getPosition()+
+					numberFormat.format(pilotResult.getPosition())+
 					"                           "+
 					pilotResult.getBestLapTimeFormated()+
 					"                           "+
@@ -74,6 +76,7 @@ public class RaceService {
 					df.format(pilotResult.getAverageTimeTotal()));
 			
 		});
+		System.out.println("================================================================================================================================= ");
 		System.out.println("\n");
 		System.out.println("BEST RACE LAP TIME: " +raceResultVO.getBestLapRace());
 	}
