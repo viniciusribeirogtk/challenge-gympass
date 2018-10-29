@@ -2,8 +2,8 @@ package br.com.gympass.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,7 +37,8 @@ public class RaceFileUtils {
 	
 	private static List<String> readKartFile(){
 		List<String> linesReaded = new ArrayList<>();
-		try (BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(FILENAME))) {
+		InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(FILENAME);
+		try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             linesReaded = bufferedReader.lines().collect(Collectors.toList());
         } catch (IOException e) {
             e.printStackTrace();
