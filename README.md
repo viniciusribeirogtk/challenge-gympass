@@ -1,5 +1,5 @@
 # Gympass Challenge
-An simple pure java solve test.
+A test solved in simple java.
 
 ## Getting Started
 
